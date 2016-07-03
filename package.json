@@ -1,0 +1,51 @@
+{
+  "name": "static_site_generator",
+  "version": "0.0.1",
+  "bugs": {
+    "url": "https://github.com/nponiros/static_site_generator/issues"
+  },
+  "license": "MIT",
+  "author": "Nikolas Poniros <nikolas@poniros.de>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nponiros/static_site_generator.git"
+  },
+  "dependencies": {
+    "clean-css": "3.4.12",
+    "dependency-graph": "0.5.0",
+    "es6-template": "1.0.4",
+    "front-matter": "^2.1.0",
+    "fs-extra": "0.26.5",
+    "highlight.js": "9.3.0",
+    "html-minifier": "1.5.0",
+    "imagemin": "4.0.0",
+    "js-yaml": "3.5.3",
+    "markdown-it": "6.0.0",
+    "mkdirp": "0.5.1",
+    "moment": "2.11.2",
+    "progress": "1.1.8",
+    "pug": "2.0.0-alpha3",
+    "uglify-js": "2.6.2",
+    "yargs": "3.31.0"
+  },
+  "engines": {
+    "node": ">=5.0.0"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "static-site-generator": "./bin/main.js"
+  },
+  "scripts": {
+    "lint": "eslint -c .eslint.yml bin/main.js lib/**/*.js"
+  },
+  "description": "A simple blog generator based on ES6/ES2015 templates",
+  "keywords": [
+    "blog",
+    "static site",
+    "es6 templates"
+  ],
+  "devDependencies": {
+    "eslint": "2.8.0"
+  },
+  "private": true
+}
