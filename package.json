@@ -1,14 +1,14 @@
 {
-  "name": "static_site_generator",
+  "name": "flexi-site-gen",
   "version": "0.0.1",
   "bugs": {
-    "url": "https://github.com/nponiros/static_site_generator/issues"
+    "url": "https://github.com/nponiros/FlexiSiteGen/issues"
   },
   "license": "MIT",
   "author": "Nikolas Poniros <nikolas@poniros.de>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nponiros/static_site_generator.git"
+    "url": "https://github.com/nponiros/FlexiSiteGen.git"
   },
   "dependencies": {
     "clean-css": "3.4.12",
@@ -38,11 +38,10 @@
   "scripts": {
     "lint": "eslint -c .eslint.yml bin/main.js lib/**/*.js"
   },
-  "description": "A simple blog generator based on ES6/ES2015 templates",
+  "description": "A simple static site generator based on jade/pug templates",
   "keywords": [
     "blog",
-    "static site",
-    "es6 templates"
+    "static site"
   ],
   "devDependencies": {
     "eslint": "2.8.0"
