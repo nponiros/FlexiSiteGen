@@ -10,7 +10,7 @@ const isProd = argv.prod;
 const generate = require('../lib/actions/generate.js');
 
 const actions = {
-  generate
+  generate,
 };
 
 const basePath = process.cwd();

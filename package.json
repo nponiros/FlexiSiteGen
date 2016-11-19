@@ -38,7 +38,8 @@
     "static-site-generator": "./bin/main.js"
   },
   "scripts": {
-    "lint": "eslint -c .eslint.yml bin/main.js lib/**/*.js"
+    "lint": "eslint bin/main.js lib/**/*.js",
+    "lint:fix": "eslint --fix bin/main.js lib/**/*.js"
   },
   "description": "A simple static site generator based on jade/pug templates",
   "keywords": [
@@ -46,7 +47,10 @@
     "static site"
   ],
   "devDependencies": {
-    "eslint": "3.10.2"
+    "eslint": "3.10.2",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1"
   },
   "private": true
 }
