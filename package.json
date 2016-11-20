@@ -31,26 +31,26 @@
     "yargs": "6.4.0"
   },
   "engines": {
-    "node": ">=5.0.0"
+    "node": ">=6.0.0"
   },
   "preferGlobal": true,
   "bin": {
-    "static-site-generator": "./bin/main.js"
+    "flexi-site-gen": "./bin/main.js"
   },
   "scripts": {
     "lint": "eslint bin/main.js lib/**/*.js",
     "lint:fix": "eslint --fix bin/main.js lib/**/*.js"
   },
-  "description": "A simple static site generator based on jade/pug templates",
+  "description": "A flexible static site generator",
   "keywords": [
     "blog",
     "static site"
   ],
   "devDependencies": {
     "eslint": "3.10.2",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1"
+    "eslint-config-standard": "6.2.1",
+    "eslint-plugin-promise": "3.4.0",
+    "eslint-plugin-standard": "2.0.1"
   },
   "private": true
 }
