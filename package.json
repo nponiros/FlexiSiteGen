@@ -37,8 +37,8 @@
     "flexi-site-gen": "./bin/main.js"
   },
   "scripts": {
-    "lint": "eslint bin/main.js lib/**/*.js",
-    "lint:fix": "eslint --fix bin/main.js lib/**/*.js"
+    "lint": "eslint bin/main.js 'lib/**/*.js'",
+    "lint:fix": "eslint --fix bin/main.js 'lib/**/*.js'"
   },
   "description": "A flexible static site generator",
   "keywords": [
