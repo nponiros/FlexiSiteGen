@@ -12,6 +12,7 @@
     }],
     "comma-dangle": ["error", "always-multiline"],
     "object-curly-spacing": ["error", "always"],
-    "no-else-return": "error"
+    "no-else-return": "error",
+    "max-len": ["error", 120]
   }
 }
