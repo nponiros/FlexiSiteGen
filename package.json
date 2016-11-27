@@ -37,8 +37,10 @@
     "flexi-site-gen": "./bin/main.js"
   },
   "scripts": {
-    "lint": "eslint bin/main.js 'lib/**/*.js'",
-    "lint:fix": "eslint --fix bin/main.js 'lib/**/*.js'"
+    "lint": "eslint bin/main.js 'lib/**/*.js' 'spec/**/*.js'",
+    "lint:fix": "eslint --fix bin/main.js 'lib/**/*.js' 'spec/**/*.js'",
+    "test": "jasmine",
+    "coverage": "istanbul cover -x '**/spec/**' -x '**/bin/**' --include-all-sources jasmine"
   },
   "description": "A flexible static site generator",
   "keywords": [
@@ -49,7 +51,8 @@
     "eslint": "3.10.2",
     "eslint-config-standard": "6.2.1",
     "eslint-plugin-promise": "3.4.0",
-    "eslint-plugin-standard": "2.0.1"
+    "eslint-plugin-standard": "2.0.1",
+    "jasmine": "^2.5.2"
   },
   "private": true
 }
