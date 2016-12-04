@@ -1,0 +1,20 @@
+extends ./layout/layout.pug
+
+block content
+  main()
+    h1 Blog
+
+    current.content.section1
+
+    each post in current.pagination.posts
+      section(class="post-summary")
+        h2=post.meta.title
+        ul
+          each tag in post.meta.tags
+            li
+              a(href=tag.url) !{tag.label}
+        div !{post.content.summary}
+        a(href=post.meta.url) Read more
+
+    each control in current.pagination.controls
+      a.link(href=control.url, class=control.isActive ? 'active' : '')=control.label

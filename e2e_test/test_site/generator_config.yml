@@ -1,0 +1,46 @@
+global:
+  outputDir: 'e2e_test/test_site/public'
+
+fileProcessors:
+  markdown:
+    html: true
+    codeHighlight: true
+
+asset:
+  active:
+    - 'styles'
+    - 'scripts'
+
+content:
+  active:
+    - 'pages'
+    - 'posts'
+  global:
+    urlWithExtension: false
+    styles:
+      - name: 'styles.css'
+  pages:
+    template: 'page'
+  posts:
+    template: 'post'
+    dateFormatInUrl: 'YYYY/MM/DD'
+    dateFormat: 'DD-MM-YYYY' # only used to parse the date in the posts meta file
+
+decorator:
+  active:
+    - 'tags'
+    - 'sitemap'
+    - 'pagination'
+  tags:
+    createTagsFor:
+      - 'posts'
+  sitemap:
+    domain: 'http://localhost:8080'
+    createMapFor:
+      - 'pages'
+      - 'posts'
+  pagination:
+    paginate:
+      - contentToPaginate: 'posts'
+        paginationPage: 'blog'
+        contentPerPage: 2

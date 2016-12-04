@@ -1,0 +1,13 @@
+extends ./layout/layout.pug
+
+block content
+  main(class="row")
+    h1 Tags
+
+    each tag in tags.posts
+      section(class="post-summary col-xs-12")
+        h2(id=tag.id) !{tag.label}
+        ul
+          each post in tag.contents
+            li
+              a(href=post.meta.url, class="foo") !{post.meta.title}

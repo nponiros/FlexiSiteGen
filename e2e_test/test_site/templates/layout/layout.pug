@@ -1,0 +1,17 @@
+doctype html
+html(lang="de")
+  head
+    include ../partials/meta.pug
+
+    each style in current.styles
+      link(rel="stylesheet" href=style.url)&attributes(style.opts)
+
+  body
+    div
+      div
+    div(class="container")
+
+      block content
+
+    each script in current.scripts
+      script(src=script.url)&attributes(script.opts)
