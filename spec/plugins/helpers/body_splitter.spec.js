@@ -65,6 +65,24 @@ describe('splitBody()', () => {
     expect(result.section2.indexOf(section2)).not.toBe(-1);
   });
 
+  it('should work with arbitrary long splitters', () => {
+    const section1 = 'This is the first section';
+    const section2 = 'This is the second section';
+    const body = `
+        <!--section1--->
+        ${section1}
+
+        <!--section2--->
+        ${section2}
+    `;
+    const result = splitBody(body, '<!--(.*)--->');
+
+    expect(result.section1.indexOf(section1)).not.toBe(-1);
+    expect(result.section1.indexOf(section2)).toBe(-1);
+    expect(result.section2.indexOf(section1)).toBe(-1);
+    expect(result.section2.indexOf(section2)).not.toBe(-1);
+  });
+
   it('should work when the content contains the word "undefined"', () => {
     const section1 = 'This section contains undefined';
     const section2 = 'This section does not contain undefined';
