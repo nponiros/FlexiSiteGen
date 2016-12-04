@@ -97,7 +97,7 @@ const foo = 'bar';
   it('should add highlightjs elements if codeHighlight is set', () => {
     const res = markdownProcessor(markdownWithCode, { codeHighlight: true }, { bodySplitter });
 
-    expect(res.content.content).toEqual('<pre><code class="language-js"><span class="hljs-keyword">const</span>' +
+    expect(res.content.content).toEqual('<pre><code class="language-js"><span class="hljs-keyword">const</span> ' +
       'foo = <span class="hljs-string">\'bar\'</span>;\n</code></pre>\n');
   });
 
