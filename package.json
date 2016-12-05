@@ -41,7 +41,9 @@
     "lint:fix": "eslint --fix bin/main.js 'lib/**/*.js' 'spec/**/*.js'",
     "test": "jasmine",
     "test:e2e": "node ./e2e_test/test.js",
-    "coverage": "istanbul cover -x '**/spec/**' -x '**/bin/**' --include-all-sources jasmine"
+    "coverage": "istanbul cover -x '**/spec/**' -x '**/bin/**' --include-all-sources jasmine",
+    "publish-please": "publish-please",
+    "prepublish": "publish-please guard"
   },
   "description": "A flexible static site generator",
   "keywords": [
@@ -54,7 +56,7 @@
     "eslint-plugin-promise": "3.4.0",
     "eslint-plugin-standard": "2.0.1",
     "istanbul": "0.4.5",
-    "jasmine": "2.5.2"
-  },
-  "private": true
+    "jasmine": "2.5.2",
+    "publish-please": "2.2.0"
+  }
 }
