@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #dcdcdc;
+  color: #191a26;
+}
+
+header {
+  background-color: #31399e;
+  line-height: 60px;
+}
+
+footer {
+  background-color: #31399e;
+  line-height: 60px;
+  color: white;
+  text-align: center;
+}
+
+nav ul li {
+  list-style: none;
+  font-size: 18px;
+  display: inline-block;
+}
+
+a {
+  color: inherit;
+}
+
+a:active {
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
+}
+
+.title {
+  text-align: center;
+  color: white;
+  margin-top: 0;
+}
+
+main {
+  max-width: 1024px;
+  margin: auto;
+}

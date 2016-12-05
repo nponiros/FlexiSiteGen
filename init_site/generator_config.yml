@@ -1,0 +1,21 @@
+asset:
+  active:
+    - 'styles'
+    - 'scripts'
+
+content:
+  active:
+    - 'pages'
+    - 'posts'
+  global:
+    urlWithExtension: false
+    styles:
+      - name: 'styles.css'
+    scripts:
+      - name: 'index.js'
+  pages:
+    template: 'page'
+  posts:
+    template: 'post'
+    dateFormatInUrl: 'YYYY/MM/DD'
+    dateFormat: 'DD-MM-YYYY' # only used to parse the date in the posts meta file

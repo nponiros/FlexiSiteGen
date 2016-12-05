@@ -1,0 +1,10 @@
+extends ./layout/layout.pug
+
+block content
+  main
+    each post in posts
+      section(class="post-summary")
+        h2=post.meta.title
+
+        div !{post.content.summary}
+        a(href=post.meta.url) Read more

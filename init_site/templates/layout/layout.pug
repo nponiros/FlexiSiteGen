@@ -1,0 +1,23 @@
+doctype html
+html(lang="de")
+  head
+    include ../partials/meta.pug
+
+    each style in current.styles
+      link(rel="stylesheet" href=style.url)&attributes(style.opts)
+
+  body
+    header
+      h1(class="title")=current.meta.title
+    block content
+
+    footer
+      nav
+        ul
+          li
+            a(href="/")="Home"
+          li
+            a(href="about")="About"
+
+    each script in current.scripts
+      script(src=script.url)&attributes(script.opts)

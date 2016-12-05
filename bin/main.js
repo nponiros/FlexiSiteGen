@@ -8,10 +8,12 @@ const action = argv._[0];
 
 const isProd = argv.prod;
 
-const generate = require('../lib/actions/generate.js');
+const generate = require('../lib/actions/generate');
+const init = require('../lib/actions/init');
 
 const actions = {
   generate,
+  init,
 };
 
 const basePath = process.cwd();
