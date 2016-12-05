@@ -13,20 +13,8 @@ const publicDir = testBasePath + '/public';
 generateFn(testBasePath, false, (_, n) => {
   n();
 
-  function getFilesList(dir, filelist) {
-    const files = fs.readdirSync(dir);
-    files.forEach((file) => {
-      if (fs.statSync(path.join(dir, file)).isDirectory()) {
-        filelist = getFilesList(path.join(dir, file), filelist);
-      } else {
-        filelist.push(path.join(dir, file));
-      }
-    });
-    return filelist;
-  }
-
-  const result = getFilesList(publicDir, []);
-  const expectation = getFilesList(expectationDir, []);
+  const result = fs.walkSync(publicDir);
+  const expectation = fs.walkSync(expectationDir, []);
 
   assert(result.length === expectation.length, 'The number of files in the directories do not match');
 
