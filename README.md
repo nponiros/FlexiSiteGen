@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
+[![Build Status](https://travis-ci.org/nponiros/FlexiSiteGen.svg?branch=master)](https://travis-ci.org/nponiros/FlexiSiteGen)
 
 # FlexiSiteGen
 
