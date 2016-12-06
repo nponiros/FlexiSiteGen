@@ -4,6 +4,7 @@ const init = require('../../lib/generic_processors/template_processor');
 
 describe('generic template processor', () => {
   let genericTemplateProcessor;
+  const basePath = '/foo';
 
   const pugTemplateProcessor = {
     process: jasmine.createSpy('process spy'),
@@ -30,7 +31,7 @@ describe('generic template processor', () => {
   });
 
   beforeAll(() => {
-    genericTemplateProcessor = init(templateProcessors, templates, defaultOpts, helpers);
+    genericTemplateProcessor = init(templateProcessors, templates, defaultOpts, helpers, basePath);
   });
 
   afterEach(() => {
@@ -78,7 +79,7 @@ describe('generic template processor', () => {
     genericTemplateProcessor('dummyPugTemplate', {}, {});
 
     expect(pugTemplateProcessor.process.calls.argsFor(0)[1]).toEqual({
-      filenameWithPath: `${process.cwd()}/foobar/dummyPugTemplate.pug`,
+      filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       bar: 'baz',
       foo: 'bar',
     });
@@ -88,7 +89,7 @@ describe('generic template processor', () => {
     genericTemplateProcessor('dummyPugTemplate', {}, { bar: 'foobar' });
 
     expect(pugTemplateProcessor.process.calls.argsFor(0)[1]).toEqual({
-      filenameWithPath: `${process.cwd()}/foobar/dummyPugTemplate.pug`,
+      filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       bar: 'foobar',
       foo: 'bar',
     });
@@ -101,11 +102,11 @@ describe('generic template processor', () => {
       pug: { foo: 'baz' },
     };
 
-    const genericTemplateProcessor = init(templateProcessors, templates, defaultOpts, helpers);
+    const genericTemplateProcessor = init(templateProcessors, templates, defaultOpts, helpers, basePath);
 
     genericTemplateProcessor('dummyPugTemplate', {}, {});
     expect(pugTemplateProcessor.process.calls.argsFor(0)[1]).toEqual({
-      filenameWithPath: `${process.cwd()}/foobar/dummyPugTemplate.pug`,
+      filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       foo: 'baz',
     });
   });
