@@ -1,7 +1,6 @@
 'use strict';
 
 const fs = require('fs-extra');
-const path = require('path');
 const assert = require('assert');
 
 const generateFn = require('../lib/actions/generate');
@@ -20,17 +19,17 @@ generateFn(testBasePath, false, (_, n) => {
 
   const resultFiles = result.reduce((map, filePath) => Object.assign(
     map,
-    { [filePath]: fs.readFileSync(filePath, {encoding: 'utf8'}) }
+    { [filePath]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
   ), {});
 
   const expectedFiles = expectation.reduce((map, filePath) => Object.assign(
       map,
-      { [filePath.replace(expectationDir, publicDir)]: fs.readFileSync(filePath, {encoding: 'utf8'}) }
+      { [filePath.replace(expectationDir, publicDir)]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
   ), {});
 
   const keys = Object.keys(expectedFiles);
   keys.forEach((key) => {
-    assert(expectedFiles[key] === resultFiles[key], `The files do not match. File was: ${key}`)
+    assert(expectedFiles[key] === resultFiles[key], `The files do not match. File was: ${key}`);
   });
 
   fs.removeSync(publicDir);
