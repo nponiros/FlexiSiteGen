@@ -37,8 +37,8 @@
     "flexi-site-gen": "./bin/main.js"
   },
   "scripts": {
-    "lint": "eslint bin/main.js 'lib/**/*.js' 'spec/**/*.js'",
-    "lint:fix": "eslint --fix bin/main.js 'lib/**/*.js' 'spec/**/*.js'",
+    "lint": "eslint bin/main.js 'lib/**/*.js' 'spec/**/*.js' 'e2e_test/**/*.js'",
+    "lint:fix": "eslint --fix bin/main.js 'lib/**/*.js' 'spec/**/*.js' 'e2e_test/**/*.js'",
     "test": "jasmine",
     "test:e2e": "node ./e2e_test/test.js",
     "coverage": "istanbul cover -x '**/spec/**' -x '**/bin/**' --include-all-sources jasmine",
