@@ -42,7 +42,7 @@
     "test": "npm run lint; npm run test:unit; npm run test:e2e",
     "test:e2e": "node ./e2e_test/test.js",
     "test:unit": "jasmine",
-    "coverage": "istanbul cover -x '**/spec/**' -x '**/bin/**' -x '**/init_site/**' -x '**/e2e_test/**' --include-all-sources coverage.js",
+    "coverage": "istanbul cover  --include-all-sources coverage.js",
     "publish-please": "publish-please",
     "prepublish": "publish-please guard"
   },
