@@ -12,7 +12,7 @@ const expectationProdDir = testBasePath + '/expectation_prod';
 const publicDir = testBasePath + '/public';
 
 function t1(done) {
-  console.log('generate test')
+  console.log('generate test');
   generateFn(testBasePath, false, (_, n) => {
     n();
 
