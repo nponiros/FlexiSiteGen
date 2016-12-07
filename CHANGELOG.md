@@ -5,11 +5,18 @@ Please not that there was no stable release yet and things may break at any time
 
 ## [] - Not released
 
+### Added
+
+* basePath property to global config
+
+### Changed
+
 * Fix link when generating the initial site via the init action
 
 ### Breaking changes
 
 * If we use the same script/style name twice when using the createScripts/createStyles helper then only the last reference is used. The rest get removed.
+* Imagemin was updated. Now there is no default image optimization. The user must configure that in the generator config file
 
 ## [0.2.0] - 2016-15-05
 
