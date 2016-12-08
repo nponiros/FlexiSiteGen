@@ -13,8 +13,10 @@ describe('register content asset decorator processor', () => {
     registerFn = init({
       generatorConfig: {
         decorator: {
-          common: { foo: 'bar' },
-          path: 'decorator',
+          common: {
+            foo: 'bar',
+            path: 'decorator',
+          },
           foo: { dummy: 'dummy' },
           active: ['foo', 'baz'],
         },
@@ -67,7 +69,7 @@ describe('register content asset decorator processor', () => {
 
     expect(spy).toHaveBeenCalledWith({
       processorConfig: { dummy: 'dummy' },
-      processorCommonConfig: { foo: 'bar' },
+      processorCommonConfig: { path: 'decorator', foo: 'bar' },
       commonConfig: { common: 'config' },
     });
   });

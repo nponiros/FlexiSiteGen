@@ -17,8 +17,10 @@ describe('generic template processor', () => {
     helperFn() {},
   };
   const defaultOpts = {
-    path: 'foobar',
-    common: { foo: 'bar' },
+    common: {
+      foo: 'bar',
+      path: 'foobar',
+    },
     pug: { bar: 'baz' },
   };
   const templates = new Map();
@@ -82,6 +84,7 @@ describe('generic template processor', () => {
       filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       bar: 'baz',
       foo: 'bar',
+      path: 'foobar',
     });
   });
 
@@ -92,13 +95,16 @@ describe('generic template processor', () => {
       filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       bar: 'foobar',
       foo: 'bar',
+      path: 'foobar',
     });
   });
 
   it('should overwrite the common options with the processor options', () => {
     const defaultOpts = {
-      path: 'foobar',
-      common: { foo: 'bar' },
+      common: {
+        path: 'foobar',
+        foo: 'bar',
+      },
       pug: { foo: 'baz' },
     };
 
@@ -108,6 +114,7 @@ describe('generic template processor', () => {
     expect(pugTemplateProcessor.process.calls.argsFor(0)[1]).toEqual({
       filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       foo: 'baz',
+      path: 'foobar',
     });
   });
 
