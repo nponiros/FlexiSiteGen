@@ -17,5 +17,4 @@ content:
     template: 'page'
   posts:
     template: 'post'
-    dateFormatInUrl: 'YYYY/MM/DD'
     dateFormat: 'DD-MM-YYYY' # only used to parse the date in the posts meta file
