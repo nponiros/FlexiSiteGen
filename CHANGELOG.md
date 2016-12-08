@@ -8,6 +8,7 @@ Please not that there was no stable release yet and things may break at any time
 ### Added
 
 * basePath property to global config
+* support nested directories for images and fonts
 
 ### Changed
 
