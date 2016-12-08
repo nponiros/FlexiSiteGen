@@ -16,7 +16,15 @@ This software ist still very much experimental and might break at any time. Use 
 * [Overview](#overview)
 * [Adding new content](#adding-new-content)
 * [Using front-matter](#using-front-matter)
+* [Configuration](#configuration)
 * [Built-in Processors](#built-in-processors)
+  * [File Processors](#file-processors)
+  * [Template Processors](#template-processors)
+  * [Content Processors](#content-processors)
+  * [Asset Processors](#asset-processors)
+  * [Decorators](#decorators)
+* [Contributing](#contributing)
+* [License](#license)
 
 ## Why yet another static site generator
 
@@ -157,11 +165,56 @@ title: 'Foo bar'
 
 It is important to place your front-matter attributes between `---` and `---` and it needs to be the first thing in the file.
 
+## Configuration
+
+The configuration for the tool can be found in the `generator_config.yml` file.
+
+There are different levels of configuration each with a different priority. The different levels are:
+
+1) configuration for a processor type and a concrete processor in generator\_config.yml, for example for the markdown file processor
+2) common configuration for a processor type in generator\_config.yml, for example for all file processors
+3) common configuration for all processors in generator\_config.yml
+
+The order above also defines the precedence order for the built-in processors. If for example you define the same key in the common configuration and the configuration for the processor, then the value of the processor configuration will  be used.
+
+Please note that in the end each processor defines which options it will use, if it will consider options set in individual content files (meta data) and if it wants to honor the precedence order defined here. Also the processor defines how exactly the keys of the various configuration levels will be merged if the key points to an object or array.
+
+In some cases you can also configure a processor using the meta data of a file. As above the processor defines what it does with the data. See each processor for more information on how it handles the configuration.
+
+__Default configuration file__
+
+```YAML
+common:
+  outputDir: 'public' # Directory in which the site will be generated
+template:
+  common:
+    path: 'templates' # Path where the templates are saved
+  pug:
+    pretty: true
+asset:
+  common:
+    path: 'assets' # path to assets
+  styles:
+    postcssPlugins:
+      prod:
+        - 'cssnano' # Used during production mode to minify the CSS
+content:
+  common:
+    path: 'content' # path to content
+  global:
+    urlWithExtension: false # Don't use .html as extension for the URLs
+    htmlmin: # Used during production mode to minify the HTML
+      removeAttributeQuotes: true
+      collapseWhitespace: true
+  posts:
+    urlFormat: ':year/:month/:day/:name/'
+```
+
 ## Built-in Processors
 
 ### File Processors
 
-The file processors are called for each file in the content folders. Which processor is called depends on the extension of the file. You can configure the file processor in the generator configuration file. Use `file` as key (see below for examples for the individual file processor).
+The file processors are called for each file in the content folders. Which processor is called depends on the extension of the file. You can configure the file processor in the generator configuration file. Use `file` as key (see below for examples for the individual file processor). File processors are activated by default.
 
 Built-in file processors:
 
@@ -217,25 +270,325 @@ file:
 
 ### Template Processors
 
+The template processors are used for the files in the templates folder. Depending on the extension the correct processor is called. You can use the `template` key to configure them. Template processors are activated by default.
+
+#### Common configuration
+
+```YAML
+template:
+  common:
+    path: 'templates' # Path where the templates are saved
+```
+
+Built-in template processors:
+
 * pug (used to be jade)
 
+#### pug
+
+* Extensions: .pug
+* Uses: [pug](https://pugjs.org/api/getting-started.html)
+* Configuration: you can use the options allowed by pug
+  * The `filename` option is automatically set
+* Default configuration: `pretty: true`
+
+##### Configuration example
+     
+```YAML
+template:
+  pug:
+    pretty: true
+```
+
 ### Content Processors
+
+The content processors are used for files/folders in the content folder. Content processors are deactivated by default and need to be explicitly activated using the `active` key in the configuration file.
+
+#### Common configuration
+
+```YAML
+content:
+  active: # Activate the pages and posts content processors
+    - 'pages'
+    - 'posts'
+  common:
+    path: 'content' # Path where the contents are saved
+```
+
+Built-in content processors:
 
 * pages
 * posts
 
+#### pages
+
+Can be used to create individual pages. Uses [htmlmin](https://www.npmjs.com/package/htmlmin) in production mode for minification.
+
+##### Configuration
+
+__generator\_config.yml__
+
+```YAML
+content:
+  pages:
+    template: 'page'       # The template for all pages
+    scripts:               # scripts for all pages. Requires the scripts asset processor
+      - name: 'script.js'
+        opts:              # Options for this script
+          async: true
+    styles:                # styles for all pages. Requires the styles asset processor
+      - name: 'styles.css' 
+        opts:              # Options for this style
+          media: 'all'
+    htmlmin:               # HTML minification for production mode. You can specify more htmlmin options if you want
+      removeAttributeQuotes: true,
+      collapseWhitespace: true,
+```
+
+__File meta data__
+
+* __url__: Defines the URL to be used for the page. If not specified the file/folder name is used
+* __template__: Defines the template to be used for this page. If not specified the `template` in generator\_config.yml is used
+* __scripts__: Same format as above. If scripts are defined in the configuration file and the meta data then those are concatenated. If the same name is defined multiple times, the last definition is used
+* __styles__: Same format as above. If styles are defined in the configuration file and the meta data then those are concatenated. If the same name is defined multiple times, the last definition is used
+
+##### Template variables
+
+* __current__: Object for the current page
+  * __content__: Object containing the page content. If no sections are used `content.content` is all content of the file minus meta data
+  * __meta__: Object containing all page meta data
+  * __styles__: Array of all styles for this page
+  * __scripts__: Array of all the scripts for this page
+* __pages__: Array containing all pages. Each page is an object with the same attributes as `current`
+
+#### posts
+
+Can be used to create a blog. The main blog page is defined using `pages` and the individual blog posts are defined using the `posts` content processor. Uses [htmlmin](https://www.npmjs.com/package/htmlmin) in production mode for minification.
+
+##### Configuration
+
+__generator\_config.yml__
+
+```YAML
+content:
+  posts:
+    template: 'post'       # The template for all posts
+    scripts:               # scripts for all posts. Requires the scripts asset processor
+      - name: 'script.js'
+        opts:              # Options for this script
+          async: true
+    styles:                # styles for all posts. Requires the styles asset processor
+      - name: 'styles.css' 
+        opts:              # Options for this style
+          media: 'all'
+    htmlmin:               # HTML minification for production mode. You can specify more htmlmin options if you want
+      removeAttributeQuotes: true,
+      collapseWhitespace: true,
+    urlFormat: '_blog/${year}/${month}/${date}/' # Uses the date in the meta data to create a url in this format. Values within ${...} will be replaced by numbers given in the date key in the post's meta data
+    dateFormat: 'DD-MM-YYYY' # used to parse the date key in the posts meta data
+```
+
+__File meta data__
+
+* __url__: Defines the URL to be used for the post. If not specified the file/folder name is used. The `urlFormat` value is used a prefix for the URL
+* __date__: It is used to define the URL and is a required attribute. Its format is specified by the `dateFormat` key. Posts are also sorted according to this date (newest first)
+* __template__: Defines the template to be used for this post. If not specified the `template` in generator\_config.yml is used
+* __scripts__: Same format as above. If scripts are defined in the configuration file and the meta data then those are concatenated. If the same name is defined multiple times, the last definition is used
+* __styles__: Same format as above. If styles are defined in the configuration file and the meta data then those are concatenated. If the same name is defined multiple times, the last definition is used
+
+##### Template variables
+
+* __current__: Object for the current post
+  * __content__: Object containing the page content. If no sections are used `content.content` is all content of the file minus meta data
+  * __meta__: Object containing all post meta data
+  * __styles__: Array of all styles for this post (only if styles is defined in the configuration or meta)
+  * __scripts__: Array of all the scripts for this post (only if scripts is defined in the configuration or meta)
+* __posts__: Array containing all posts. Each post is an object with the same attributes as `current`
+
 ### Asset Processors
+
+The asset processors are used for files/folders in the assets folder. Asset processors are deactivated by default and need to be explicitly activated using the `active` key in the configuration file.
+
+#### Common configuration
+
+```YAML
+asset:
+  active: # Activate the styles and scripts asset processors
+    - 'styles'
+    - 'scripts'
+  common:
+    path: 'assets' # Path where the assets are saved
+```
+
+Built-in asset processors:
 
 * images
 * scripts
 * styles
 * fonts
 
+#### images
+
+Is used to copy images from the assets directory to the output directory. Uses [imagemin](https://github.com/imagemin/imagemin) in production mode to minify/optimize the images. You have to configure which minification plugin is used for each extension. Read the imagemin documentation for information on which plugins are available. The plugin must be installed using npm and it will automatically be loaded by the tool. All imagemin plugins use `imagemin-pluginName` as package name. You need to just use `pluginName` the `imagemin-` prefix is automatically added.
+
+##### Configuration
+
+__generator\_config.yml__
+
+```YAML
+asset:
+  images:
+    minify:                   # imagemin configuration
+     '.png':                  # config for all .png images
+       plugin: 'optipng'      # plugin to be used imagemin-optipng
+       opts:                  # options for imagemin-optipng
+         optimizationLevel: 3
+
+```
+
+#### fonts
+
+Is used to copy fonts from the assets directory to the output directory. Currently not configurable.
+
+#### styles
+
+ It uses [PostCSS](https://github.com/postcss/postcss) to process the CSS files. You can define which PostCSS plugins to use. The plugins need to be installed via npm. An exception is `cssnano` which is installed by default and used in production mode to minify the css. The plugins will automatically be loaded by the tool.
+
+##### Configuration
+
+__generator\_config.yml__
+
+```YAML
+asset:
+  styles:
+    postcss:                  # PostCSS plugins
+      prod:                   # Plugins for production mode
+        - 'precss'          
+        - 'cssnano'
+      dev:
+        - 'precss'
+    bundles:                  # Define bundle with name common.css. The bundle can be used in the styles of pages/posts
+      - name: 'common.css'
+        files:                # Files to be concatenated to create the bundle
+          - '00-normalize.css'
+          - '01-grid.css'
+```
+
+##### Template variables
+
+* __styles__: Array containing all style objects
+
+#### scripts
+
+It uses [UglifyJS](https://github.com/mishoo/UglifyJS2) to minify the scripts in production mode.
+
+##### Configuration
+
+__generator\_config.yml__
+
+```YAML
+asset:
+  scripts:
+    minify:                   # UglifyJS options
+      mangle: true
+    bundles:                  # Define bundle with name common.js. The bundle can be used in the scripts of pages/posts
+      - name: 'common.js'
+        files:                # Files to be concatenated to create the bundle
+          - 'index.js'
+          - 'menu.js'
+```
+
+##### Template variables
+
+* __scripts__: Array containing all script objects
+
 ### Decorators
+
+The decorators are used to extend and manipulate your contents. Decorators are deactivated by default and need to be explicitly activated using the `active` key in the configuration file.
+
+#### Common configuration
+
+__generator\_config.yml__
+
+```YAML
+decorator:
+  active: # Activate the tags decorator
+    - 'tags'
+```
+
+Built-in decorators:
 
 * tags
 * sitemap
 * pagination
+
+#### tags
+
+Reads the tags key out of the meta data for the defined content type (`createTagsFor` array) and create a template variable named `tags` which is an object with keys matching the names in `createTagsFor`. Each key is an array containing the relevant content. It also extends the tags of the meta data and adds a URL to them.
+
+##### Configuration
+
+__generator\_config.yml__
+
+```YAML
+decorator:
+  tags:
+    createTagsFor:
+      - 'posts'
+```
+
+__File meta data__
+
+* __tags__: Tags for an individual page/post etc.
+
+##### Template variables
+
+* __tags__: Object containing all keys defined in `createTagsFor`. Each key has an array as value containing the relevant content
+
+#### sitemap
+
+Creates a sitemap.xml file for your site.
+
+##### Configuration
+
+__generator\_config.yml__
+
+```YAML
+decorator:
+  sitemap:
+   domain: 'http://localhost:8080' # domain to be used in the sitemap
+   createMapFor:                   # the content which should be added to the sitemap
+     - 'pages'
+     - 'posts'
+```
+
+__File meta data__
+
+* __sitemap__: Object with the following keys: `priority`, `lastModified` (lastmod) and `changeFrequency` (changefreq). Check [sitemaps.org](https://www.sitemaps.org/protocol.html) for the values allowed for the keys.
+
+#### pagination
+
+With this decorator you can for example paginate posts. For this to work you need to define the content to paginate an a page (`paginationPage` key) in which to write the content. The decorator will automatically create copies of the page and each copy will receive a number of content depending on `contentPerPage`.
+
+##### Configuration
+ 
+__generator\_config.yml__
+ 
+```YAML
+decorator:
+  pagination:
+    paginate:                      # Array with the contents to paginate
+      - contentToPaginate: 'posts' # content type to paginate (pages cannot be paginated)
+        paginationPage: 'blog'     # template to be used for the pagination contents
+        contentPerPage: 5          # the number of content files per page
+```
+
+##### Template variables
+
+* __controls__: An array of objects with keys: `label`, `isActive`, `url`. The `label` is the page number, `isActive` informs us on which pagination page we are and the `url` can be used to navigate to a specific page
+* __currentPageNumber__: The number of the current page
+* __numOfPages__: Total number of pagination pages
+* __[contents to paginate]__: This key changes depending on `contentToPaginate`, if `contentToPaginate` is `posts`, then this key will also be `posts`. The key always contains an array with as many content objects as `contentPerPage`. The last page might have less.
 
 ## Plugins
 
@@ -252,7 +605,7 @@ If you define a plugin having the same name as an internal plugin then yours wil
 ## Contributing
 
 If you feel you can help in any way, be it with documentation, examples, extra testing, or new features please open an [issue](https://github.com/nponiros/FlexiSiteGen/issues) or [pull request](https://github.com/nponiros/FlexiSiteGen/pulls).
-If you have any questions feel free to open an [issue](https://github.com/nponiros/GlexiSiteGen/issues) with your question.
+If you have any questions feel free to open an [issue](https://github.com/nponiros/FlexiSiteGen/issues) with your question.
 
 ## License
 
