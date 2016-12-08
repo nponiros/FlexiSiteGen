@@ -1,4 +1,4 @@
-global:
+common:
   outputDir: 'e2e_test/test_site/public'
 
 fileProcessors:
@@ -15,7 +15,7 @@ content:
   active:
     - 'pages'
     - 'posts'
-  global:
+  common:
     urlWithExtension: false
     styles:
       - name: 'styles.css'

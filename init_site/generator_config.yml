@@ -7,7 +7,7 @@ content:
   active:
     - 'pages'
     - 'posts'
-  global:
+  common:
     urlWithExtension: false
     styles:
       - name: 'styles.css'

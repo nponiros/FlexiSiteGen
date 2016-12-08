@@ -16,7 +16,7 @@ describe('generic file processor', () => {
     helperFn() {},
   };
   const defaultOpts = {
-    global: { foo: 'bar' },
+    common: { foo: 'bar' },
     text: { bar: 'baz' },
   };
 
@@ -66,9 +66,9 @@ describe('generic file processor', () => {
     });
   });
 
-  it('should overwrite the global options with the processor options', () => {
+  it('should overwrite the common options with the processor options', () => {
     const defaultOpts = {
-      global: { foo: 'bar' },
+      common: { foo: 'bar' },
       text: { foo: 'baz' },
     };
 

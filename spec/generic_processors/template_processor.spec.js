@@ -18,7 +18,7 @@ describe('generic template processor', () => {
   };
   const defaultOpts = {
     path: 'foobar',
-    global: { foo: 'bar' },
+    common: { foo: 'bar' },
     pug: { bar: 'baz' },
   };
   const templates = new Map();
@@ -95,10 +95,10 @@ describe('generic template processor', () => {
     });
   });
 
-  it('should overwrite the global options with the processor options', () => {
+  it('should overwrite the common options with the processor options', () => {
     const defaultOpts = {
       path: 'foobar',
-      global: { foo: 'bar' },
+      common: { foo: 'bar' },
       pug: { foo: 'baz' },
     };
 
