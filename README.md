@@ -195,9 +195,10 @@ asset:
   common:
     path: 'assets' # path to assets
   styles:
-    postcssPlugins:
-      prod:
-        - 'cssnano' # Used during production mode to minify the CSS
+    postcss:
+      plugins:
+        prod:
+          - name: 'cssnano' # Used during production mode to minify the CSS
 content:
   common:
     path: 'content' # path to content
@@ -452,7 +453,7 @@ Is used to copy fonts from the assets directory to the output directory. Current
 
 #### styles
 
- It uses [PostCSS](https://github.com/postcss/postcss) to process the CSS files. You can define which PostCSS plugins to use. The plugins need to be installed via npm. An exception is `cssnano` which is installed by default and used in production mode to minify the css. The plugins will automatically be loaded by the tool.
+ It uses [PostCSS](https://github.com/postcss/postcss) to process the CSS files. You can define which PostCSS plugins to use. The plugins need to be installed via npm. An exception is `cssnano` which is installed by default and used in production mode to minify the CSS. The plugins will automatically be loaded by the tool. There is also support for the following PostCSS options: `syntax`, `parser` and `stringifier`. For those you can give the name of the PostCSS plugin and it will be automatically loaded by the tool. You would have to install the plugin via npm.
 
 ##### Configuration
 
@@ -461,12 +462,18 @@ __generator\_config.yml__
 ```YAML
 asset:
   styles:
-    postcss:                  # PostCSS plugins
-      prod:                   # Plugins for production mode
-        - 'precss'          
-        - 'cssnano'
-      dev:
-        - 'precss'
+    postcss: 
+      plugins:                    # PostCSS plugins
+        prod:                     # Plugins for production mode
+          - name: 'autoprefixer'  # Use the autoprefixer plugin
+            opts:                 # Options for autoprefixer
+              browsers:
+                - 'last 2 versions'
+          - 'cssnano'
+        dev:
+          - name: 'autoprefixer'
+      opts:                       # Options for PostCSS. Supported are syntax, parser, stringifier
+        parser: 'postcss-scss'    # Use postcss-scss as parser
     bundles:                  # Define bundle with name common.css. The bundle can be used in the styles of pages/posts
       - name: 'common.css'
         files:                # Files to be concatenated to create the bundle

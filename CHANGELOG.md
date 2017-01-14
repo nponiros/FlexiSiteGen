@@ -9,11 +9,13 @@ Please not that there was no stable release yet and things may break at any time
 
 * basePath property to global config
 * support nested directories for images and fonts
+* support options for PostCSS plugins and for PostCSS itself (only parser, syntax, stringifier)
 
 ### Changed
 
 * Fix link when generating the initial site via the init action
 * Make sure that we have styles/scripts in posts/pages before trying to access those
+* Pagination plugin adds .html if urlWithExtension is true (https://github.com/nponiros/FlexiSiteGen/issues/3)
 
 ### Breaking changes
 
@@ -22,6 +24,10 @@ Please not that there was no stable release yet and things may break at any time
 * Rename global to common in configuration file
 * Configuration: move the path key into the common object for each processor needing it
 * Change the way the post urls are created. Use urlFormat for it now
+* The format of the PostCSS plugins definition in the config has been changed
+  * Used to be an array of plugin namens
+  * Is not an array of objects with `name` and `opts` properties with `name` being the name of the PostCSS plugin to load
+  * The README shows how you have to configure PostCSS now
 
 ## [0.2.0] - 2016-15-05
 
