@@ -19,7 +19,7 @@ describe('pug template processor', () => {
   });
 
   it('should add a filename property to the options object', () => {
-    pugTemplateProcessor('', { filenameWithPath: 'foobar' }, {});
+    pugTemplateProcessor('templateName', '', { filenameWithPath: 'foobar' }, {});
 
     expect(pug.compile).toHaveBeenCalledWith('', {
       filenameWithPath: 'foobar',
@@ -28,7 +28,7 @@ describe('pug template processor', () => {
   });
 
   it('should call render spy with the given template variables', () => {
-    pugTemplateProcessor('', { filenameWithPath: 'foobar' }, { vars: 'foo' });
+    pugTemplateProcessor('templateName', '', { filenameWithPath: 'foobar' }, { vars: 'foo' });
 
     expect(renderSpy).toHaveBeenCalledWith({ vars: 'foo' });
   });

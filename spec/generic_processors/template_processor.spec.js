@@ -63,12 +63,12 @@ describe('generic template processor', () => {
   it('should call the process function with the contents of the template', () => {
     genericTemplateProcessor('dummyPugTemplate', {}, {});
 
-    expect(pugTemplateProcessor.process.calls.argsFor(0)[0]).toBe('template contents');
+    expect(pugTemplateProcessor.process.calls.argsFor(0)[1]).toBe('template contents');
   });
 
   it('should return the output of the process function', () => {
     const templateProcessors = new Map().set('pug', {
-      process(contents) { return contents; },
+      process(name, contents) { return contents; },
       extensions: ['.pug'],
     });
     const genericTemplateProcessor = init(templateProcessors, templates, defaultOpts, helpers);
@@ -80,7 +80,7 @@ describe('generic template processor', () => {
   it('should add a filenameWithPath property to the options', () => {
     genericTemplateProcessor('dummyPugTemplate', {}, {});
 
-    expect(pugTemplateProcessor.process.calls.argsFor(0)[1]).toEqual({
+    expect(pugTemplateProcessor.process.calls.argsFor(0)[2]).toEqual({
       filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       bar: 'baz',
       foo: 'bar',
@@ -91,7 +91,7 @@ describe('generic template processor', () => {
   it('should merge defaultOpts and given options and pass those to process. Given options override defaultOpts', () => {
     genericTemplateProcessor('dummyPugTemplate', {}, { bar: 'foobar' });
 
-    expect(pugTemplateProcessor.process.calls.argsFor(0)[1]).toEqual({
+    expect(pugTemplateProcessor.process.calls.argsFor(0)[2]).toEqual({
       filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       bar: 'foobar',
       foo: 'bar',
@@ -111,7 +111,7 @@ describe('generic template processor', () => {
     const genericTemplateProcessor = init(templateProcessors, templates, defaultOpts, helpers, basePath);
 
     genericTemplateProcessor('dummyPugTemplate', {}, {});
-    expect(pugTemplateProcessor.process.calls.argsFor(0)[1]).toEqual({
+    expect(pugTemplateProcessor.process.calls.argsFor(0)[2]).toEqual({
       filenameWithPath: `${basePath}/foobar/dummyPugTemplate.pug`,
       foo: 'baz',
       path: 'foobar',
@@ -121,7 +121,7 @@ describe('generic template processor', () => {
   it('should pass the given template variables as 3rd argument to process', () => {
     genericTemplateProcessor('dummyPugTemplate', { foo: 'bar', bar: 'baz' }, {});
 
-    expect(pugTemplateProcessor.process.calls.argsFor(0)[2]).toEqual({
+    expect(pugTemplateProcessor.process.calls.argsFor(0)[3]).toEqual({
       foo: 'bar',
       bar: 'baz',
     });
@@ -130,6 +130,6 @@ describe('generic template processor', () => {
   it('should pass the helper functions as last argument to process', () => {
     genericTemplateProcessor('dummyPugTemplate', {}, {});
 
-    expect(pugTemplateProcessor.process.calls.argsFor(0)[3].helperFn).not.toBeUndefined();
+    expect(pugTemplateProcessor.process.calls.argsFor(0)[4].helperFn).not.toBeUndefined();
   });
 });
