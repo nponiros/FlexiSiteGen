@@ -531,7 +531,11 @@ Built-in decorators:
 
 #### tags
 
-Reads the tags key out of the meta data for the defined content type (`createTagsFor` array) and create a template variable named `tags` which is an object with keys matching the names in `createTagsFor`. Each key is an array containing the relevant content. It also extends the tags of the meta data and adds a URL to them.
+Reads the tags key out of the meta data for the defined content type (`createTagsFor` array) and create a template variable named `tags` which is an object with keys matching the names in `createTagsFor`. Each key is an array containing the relevant content. It also extends the tags of the meta data and adds a URL to them. An example of tags usage can be found in [./e2e_test/test_site](./e2e_test/test_site).
+
+##### Limitations
+
+Currently all the tags must be in one page with name `tags.html`. Each tag is referenced using `tags#TagID` or `tags.html#TagID` as a URL depending on the `urlWithExtensions` config value.
 
 ##### Configuration
 
@@ -550,7 +554,8 @@ __File meta data__
 
 ##### Template variables
 
-* __tags__: Object containing all keys defined in `createTagsFor`. Each key has an array as value containing the relevant content
+* __tags__: Object containing all keys defined in `createTagsFor`. Each key has an array as value containing tag objects with `label`, `url`, `id` and `contents`. `contents` is an array with all elements which have the tag. If for example `createTagsFor` was used with "posts", then the `contents` array will contain all the posts with the given tag.
+* The tags-Array in the meta data of content used with `createTagsFor` are replaced with an object containing `label` and `url` for each tag.
 
 #### sitemap
 
@@ -575,7 +580,7 @@ __File meta data__
 
 #### pagination
 
-With this decorator you can for example paginate posts. For this to work you need to define the content to paginate an a page (`paginationPage` key) in which to write the content. The decorator will automatically create copies of the page and each copy will receive a number of content depending on `contentPerPage`.
+With this decorator you can for example paginate posts. For this to work you need to define the content to paginate an a page (`paginationPage` key) in which to write the content. The decorator will automatically create copies of the page and each copy will receive a number of content depending on `contentPerPage`. An example of pagination usage can be found in [./e2e_test/test_site](./e2e_test/test_site).
 
 ##### Configuration
  
@@ -591,6 +596,8 @@ decorator:
 ```
 
 ##### Template variables
+
+This decorator creates an object called `pagination` and is within the `current` template variable. It contains the following attributes:
 
 * __controls__: An array of objects with keys: `label`, `isActive`, `url`. The `label` is the page number, `isActive` informs us on which pagination page we are and the `url` can be used to navigate to a specific page
 * __currentPageNumber__: The number of the current page
