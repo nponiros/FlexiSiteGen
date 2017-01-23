@@ -11,6 +11,7 @@ Please not that there was no stable release yet and things may break at any time
 * Fix https://github.com/nponiros/FlexiSiteGen/issues/5
 * Bundles are no longer passed to PostCSS. Only the files making up the bundle are run through PostCSS
 * The tags decorator now supports the urlWithExtensions attribute in the config
+* Move urlWithExtension to global common from content common in the default config
 
 ## [0.3.0] - 2017-14-01
 
