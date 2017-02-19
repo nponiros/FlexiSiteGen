@@ -13,6 +13,10 @@ Please not that there was no stable release yet and things may break at any time
 * The tags decorator now supports the urlWithExtensions attribute in the config
 * Move urlWithExtension to global common from content common in the default config
 
+### Breaking
+
+* The HTML body splitter now uses a new regexp. See README for the new format. Closes #7
+
 ## [0.3.0] - 2017-14-01
 
 ### Added

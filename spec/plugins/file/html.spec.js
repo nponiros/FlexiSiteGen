@@ -25,10 +25,10 @@ foo: 'bar'
 `;
 
   const htmlWithSections = `
-<!-first-->
+<!---first---->
 <h1>First section</h1>
 
-<!-last-->
+<!---last---->
 <h1>Last section</h1>
 `;
 
@@ -36,11 +36,16 @@ foo: 'bar'
 foo: 'bar'
 ---
 
-<!-first-->
+<!---first---->
 <h1>First section</h1>
 
-<!-last-->
+<!---last---->
 <h1>Last section</h1>
+`;
+
+  const htmlWithComments = `
+<!-Comment-->
+Foobar baz
 `;
 
   it('should return fileContents as is if we are dealing with a directory', () => {
@@ -74,5 +79,11 @@ foo: 'bar'
     expect(res.meta).toEqual({ foo: 'bar' });
     expect(res.content.first).toEqual('\n<h1>First section</h1>\n\n');
     expect(res.content.last).toEqual('\n<h1>Last section</h1>\n');
+  });
+
+  it('should ignore html comments', () => {
+    const res = htmlProcessor(htmlWithComments, {}, { bodySplitter });
+
+    expect(res.content.content).toEqual('\n<!-Comment-->\nFoobar baz\n');
   });
 });

@@ -231,7 +231,7 @@ Below you can find more information about the individual file processors.
 * Extensions: .html, .htm
 * Front-Matter support: true
 * Sections support: true
-* Section splitter: <!-SectionName-->
+* Section splitter: <!---SectionName---->
 * Configuration: N/A
 
 #### json
