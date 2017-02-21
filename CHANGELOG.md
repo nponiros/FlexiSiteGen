@@ -5,6 +5,17 @@ Please not that there was no stable release yet and things may break at any time
 
 ## [] - Not released
 
+### Fixes
+
+* Fix https://github.com/nponiros/FlexiSiteGen/issues/9
+
+### Added
+
+* Allow global meta to be used by all pages. Issue #8
+* Allow global meta to be used by all posts. Issue #8
+
+## [0.4.2] - 2017-19-02
+
 ### Changed
 
 * Fix https://github.com/nponiros/FlexiSiteGen/issues/4
