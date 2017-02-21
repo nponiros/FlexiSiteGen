@@ -171,9 +171,9 @@ The configuration for the tool can be found in the `generator_config.yml` file.
 
 There are different levels of configuration each with a different priority. The different levels are:
 
-1) configuration for a processor type and a concrete processor in generator\_config.yml, for example for the markdown file processor
-2) common configuration for a processor type in generator\_config.yml, for example for all file processors
-3) common configuration for all processors in generator\_config.yml
+1. configuration for a processor type and a concrete processor in generator\_config.yml, for example for the markdown file processor
+2. common configuration for a processor type in generator\_config.yml, for example for all file processors
+3. common configuration for all processors in generator\_config.yml
 
 The order above also defines the precedence order for the built-in processors. If for example you define the same key in the common configuration and the configuration for the processor, then the value of the processor configuration will  be used.
 
@@ -332,6 +332,8 @@ __generator\_config.yml__
 ```YAML
 content:
   pages:
+    meta:                  # Meta data object to be used for all pages
+      - title: ''          # Meta data of individual pages can override this
     template: 'page'       # The template for all pages
     scripts:               # scripts for all pages. Requires the scripts asset processor
       - name: 'script.js'
@@ -373,6 +375,8 @@ __generator\_config.yml__
 ```YAML
 content:
   posts:
+    meta:                  # Meta data object to be used for all posts
+      - title: ''          # Meta data of individual posts can override this
     template: 'post'       # The template for all posts
     scripts:               # scripts for all posts. Requires the scripts asset processor
       - name: 'script.js'
