@@ -8,6 +8,7 @@ Please not that there was no stable release yet and things may break at any time
 ### Fixes
 
 * Fix https://github.com/nponiros/FlexiSiteGen/issues/9
+* Fix https://github.com/nponiros/FlexiSiteGen/issues/11
 
 ### Added
 
