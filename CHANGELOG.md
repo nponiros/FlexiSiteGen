@@ -10,6 +10,10 @@ Please not that there was no stable release yet and things may break at any time
 * Fix https://github.com/nponiros/FlexiSiteGen/issues/9
 * Fix https://github.com/nponiros/FlexiSiteGen/issues/11
 
+### Breaking
+
+* Sitemap now removes "index" if it is at the end of a path. Example http://example.com/index would become http://example.com/
+
 ### Added
 
 * Allow global meta to be used by all pages. Issue #8
