@@ -13,6 +13,7 @@ Please not that there was no stable release yet and things may break at any time
 ### Breaking
 
 * Sitemap now removes "index" if it is at the end of a path. Example http://example.com/index would become http://example.com/
+* Pagination no longer adds "Page ${num}" to the title of the pagination page. Use "current.pagination.currentPageNumber" if you want to add the page number to the title. Closes #10
 
 ### Added
 
