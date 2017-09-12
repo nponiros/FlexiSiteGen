@@ -19,6 +19,11 @@ Please not that there was no stable release yet and things may break at any time
 
 * Allow global meta to be used by all pages. Issue #8
 * Allow global meta to be used by all posts. Issue #8
+* `sitemap.exclude` can be used to exclude a page from the sitemap
+* Only relevant for plugin authors
+  * Add helper `update`. A wrapper for [immutability-helper](https://github.com/kolodny/immutability-helper)
+  * Add helper `moment`. A wrapper for [moment](https://momentjs.com)
+  * Pass extendify to the init functions of content/asset processors and decorators
 
 ## [0.4.2] - 2017-19-02
 
