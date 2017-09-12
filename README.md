@@ -572,15 +572,15 @@ __generator\_config.yml__
 ```YAML
 decorator:
   sitemap:
-   domain: 'http://localhost:8080' # domain to be used in the sitemap
-   createMapFor:                   # the content which should be added to the sitemap
-     - 'pages'
-     - 'posts'
+    domain: 'http://localhost:8080' # domain to be used in the sitemap
+    createMapFor:                   # the content which should be added to the sitemap
+      - 'pages'
+      - 'posts'
 ```
 
 __File meta data__
 
-* __sitemap__: Object with the following keys: `priority`, `lastModified` (lastmod) and `changeFrequency` (changefreq). Check [sitemaps.org](https://www.sitemaps.org/protocol.html) for the values allowed for the keys.
+* __sitemap__: Object with the following keys: `priority`, `lastModified` (lastmod), `changeFrequency` (changefreq) and `exclude`. In case `exclude` is true, then the page will not be added to the sitemap. Check [sitemaps.org](https://www.sitemaps.org/protocol.html) for the values allowed for the keys.
 
 #### pagination
 
