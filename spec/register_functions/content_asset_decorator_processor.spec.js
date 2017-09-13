@@ -67,11 +67,14 @@ describe('register content asset decorator processor', () => {
     const spy = jasmine.createSpy('foo processor');
     registerFn('decorator', 'foo', spy);
 
-    expect(spy).toHaveBeenCalledWith({
+    const args = spy.calls.argsFor(0);
+    expect(args[0]).toEqual({
       processorConfig: { dummy: 'dummy' },
       processorCommonConfig: { path: 'decorator', foo: 'bar' },
       commonConfig: { common: 'config' },
     });
+    // extendify function
+    expect(typeof args[1]).toBe('function');
   });
 
   it('should overwrite the first processor if a second of the same name is given', () => {
