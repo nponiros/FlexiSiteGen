@@ -1,9 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-Please not that there was no stable release yet and things may break at any time
+## [] - Not Released
 
-## [] - Not released
+## [0.5.0] - 2017-16-09
 
 ### Fixes
 
