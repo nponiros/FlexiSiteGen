@@ -1,7 +1,12 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [] - Not Released
+## [0.6.0] - 2017-17-11
+
+### Added
+
+* `--cachebust` flag
+* Implement cache busting in scripts and styles processors
 
 ## [0.5.0] - 2017-16-09
 
