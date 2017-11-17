@@ -6,7 +6,8 @@ const argv = require('yargs').argv;
 
 const action = argv._[0];
 
-const isProd = argv.prod;
+const isProd = argv.prod || false;
+const cacheBust = argv.cachebust || false;
 
 const generate = require('../lib/actions/generate');
 const init = require('../lib/actions/init');
@@ -23,7 +24,7 @@ process.on('unhandledRejection', (reason, p) => {
 });
 
 if (actions[action]) {
-  actions[action](basePath, isProd);
+  actions[action](basePath, { isProd, cacheBust });
 } else {
   console.log('Action', action, 'not supported');
 }

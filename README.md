@@ -84,6 +84,12 @@ __Flags__
 
 Calls all plugins with `productionMode` set to __true__. The exact behavior of the generator depends on what each plugin does when the `productionMode` property is set.
 
+```
+--cachebust
+```
+
+Calls all plugins with `cacheBust` set to __true__. The exact behavior of the generator depends on what each plugin does when the `cacheBust` property is set.
+
 ## Overview
 
 The tool differentiates between 5 types of processors, asset, content, decorator, file and template.
@@ -457,7 +463,7 @@ Is used to copy fonts from the assets directory to the output directory. Current
 
 #### styles
 
- It uses [PostCSS](https://github.com/postcss/postcss) to process the CSS files. You can define which PostCSS plugins to use. The plugins need to be installed via npm. An exception is `cssnano` which is installed by default and used in production mode to minify the CSS. The plugins will automatically be loaded by the tool. There is also support for the following PostCSS options: `syntax`, `parser` and `stringifier`. For those you can give the name of the PostCSS plugin and it will be automatically loaded by the tool. You would have to install the plugin via npm.
+It uses [PostCSS](https://github.com/postcss/postcss) to process the CSS files. You can define which PostCSS plugins to use. The plugins need to be installed via npm. An exception is `cssnano` which is installed by default and used in production mode to minify the CSS. The plugins will automatically be loaded by the tool. There is also support for the following PostCSS options: `syntax`, `parser` and `stringifier`. For those you can give the name of the PostCSS plugin and it will be automatically loaded by the tool. You would have to install the plugin via npm. Supports the `--cachebust` flag.
 
 ##### Configuration
 
@@ -491,7 +497,7 @@ asset:
 
 #### scripts
 
-It uses [UglifyJS](https://github.com/mishoo/UglifyJS2) to minify the scripts in production mode.
+It uses [UglifyJS](https://github.com/mishoo/UglifyJS2) to minify the scripts in production mode. Supports the `--cachebust` flag.
 
 ##### Configuration
 

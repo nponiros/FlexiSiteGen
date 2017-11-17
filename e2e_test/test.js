@@ -13,7 +13,7 @@ const publicDir = testBasePath + '/public';
 
 function t1(done) {
   console.log('generate test');
-  generateFn(testBasePath, false, (_, n) => {
+  generateFn(testBasePath, { isProd: false, cacheBust: false }, (_, n) => {
     n();
 
     const result = fs.walkSync(publicDir);
@@ -44,7 +44,7 @@ function t1(done) {
 
 function t2(done) {
   console.log('generate test production mode');
-  generateFn(testBasePath, true, (_, n) => {
+  generateFn(testBasePath, { isProd: true, cacheBust: false }, (_, n) => {
     n();
 
     const result = fs.walkSync(publicDir);
