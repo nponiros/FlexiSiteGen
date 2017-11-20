@@ -1,6 +1,12 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.1] - 2017-20-11
+
+### Fix
+
+* Some PostCSS plugins can empty a CSS file. In such a case the cache busting code would try to read the file from disk and fail.
+
 ## [0.6.0] - 2017-17-11
 
 ### Added
