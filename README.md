@@ -497,7 +497,7 @@ asset:
 
 #### scripts
 
-It uses [UglifyJS](https://github.com/mishoo/UglifyJS2) to minify the scripts in production mode. Supports the `--cachebust` flag.
+It uses [Terser](https://github.com/terser-js/terser) to minify the scripts in production mode. Supports the `--cachebust` flag.
 
 ##### Configuration
 
@@ -506,7 +506,7 @@ __generator\_config.yml__
 ```YAML
 asset:
   scripts:
-    minify:                   # UglifyJS options
+    minify:                   # Terser options
       mangle: true
     bundles:                  # Define bundle with name common.js. The bundle can be used in the scripts of pages/posts
       - name: 'common.js'

@@ -1,1 +1,1 @@
-!function(n){}(document);
+document;

@@ -63,7 +63,7 @@ Foobar baz
   it('should return the contents for the file in the content.content property if we have no sections', () => {
     const res = htmlProcessor(htmlWithFrontMatter, {}, { bodySplitter });
 
-    expect(res.content).toEqual({ content: '\n<h1>Title</h1>\n' });
+    expect(res.content).toEqual({ content: '<h1>Title</h1>\n' });
   });
 
   it('should return the sections in the content property', () => {

@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs-extra');
+const walkSync = require('klaw-sync');
 const assert = require('assert');
 
 const generateFn = require('../lib/actions/generate');
@@ -16,19 +17,19 @@ function t1(done) {
   generateFn(testBasePath, { isProd: false, cacheBust: false }, (_, n) => {
     n();
 
-    const result = fs.walkSync(publicDir);
-    const expectation = fs.walkSync(expectationDir, []);
+    const result = walkSync(publicDir, { nodir: true });
+    const expectation = walkSync(expectationDir, { nodir: true });
 
     assert(result.length === expectation.length, 'The number of files in the directories do not match');
 
-    const resultFiles = result.reduce((map, filePath) => Object.assign(
+    const resultFiles = result.reduce((map, file) => Object.assign(
       map,
-      { [filePath]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
+      { [file.path]: fs.readFileSync(file.path, { encoding: 'utf8' }) }
     ), {});
 
-    const expectedFiles = expectation.reduce((map, filePath) => Object.assign(
+    const expectedFiles = expectation.reduce((map, file) => Object.assign(
       map,
-      { [filePath.replace(expectationDir, publicDir)]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
+      { [file.path.replace(expectationDir, publicDir)]: fs.readFileSync(file.path, { encoding: 'utf8' }) }
     ), {});
 
     const keys = Object.keys(expectedFiles);
@@ -47,19 +48,19 @@ function t2(done) {
   generateFn(testBasePath, { isProd: true, cacheBust: false }, (_, n) => {
     n();
 
-    const result = fs.walkSync(publicDir);
-    const expectation = fs.walkSync(expectationProdDir, []);
+    const result = walkSync(publicDir, { nodir: true });
+    const expectation = walkSync(expectationProdDir, { nodir: true });
 
     assert(result.length === expectation.length, 'The number of files in the directories do not match');
 
-    const resultFiles = result.reduce((map, filePath) => Object.assign(
+    const resultFiles = result.reduce((map, file) => Object.assign(
       map,
-      { [filePath]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
+      { [file.path]: fs.readFileSync(file.path, { encoding: 'utf8' }) }
     ), {});
 
-    const expectedFiles = expectation.reduce((map, filePath) => Object.assign(
+    const expectedFiles = expectation.reduce((map, file) => Object.assign(
       map,
-      { [filePath.replace(expectationProdDir, publicDir)]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
+      { [file.path.replace(expectationProdDir, publicDir)]: fs.readFileSync(file.path, { encoding: 'utf8' }) }
     ), {});
 
     const keys = Object.keys(expectedFiles);
