@@ -22,13 +22,13 @@ function t1(done) {
     assert(result.length === expectation.length, 'The number of files in the directories do not match');
 
     const resultFiles = result.reduce((map, filePath) => Object.assign(
-        map,
-        { [filePath]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
+      map,
+      { [filePath]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
     ), {});
 
     const expectedFiles = expectation.reduce((map, filePath) => Object.assign(
-        map,
-        { [filePath.replace(expectationDir, publicDir)]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
+      map,
+      { [filePath.replace(expectationDir, publicDir)]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
     ), {});
 
     const keys = Object.keys(expectedFiles);
@@ -53,13 +53,13 @@ function t2(done) {
     assert(result.length === expectation.length, 'The number of files in the directories do not match');
 
     const resultFiles = result.reduce((map, filePath) => Object.assign(
-        map,
-        { [filePath]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
+      map,
+      { [filePath]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
     ), {});
 
     const expectedFiles = expectation.reduce((map, filePath) => Object.assign(
-        map,
-        { [filePath.replace(expectationProdDir, publicDir)]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
+      map,
+      { [filePath.replace(expectationProdDir, publicDir)]: fs.readFileSync(filePath, { encoding: 'utf8' }) }
     ), {});
 
     const keys = Object.keys(expectedFiles);
