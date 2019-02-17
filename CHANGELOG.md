@@ -1,6 +1,11 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.0] - 2019-17-02
+
+* Upgrade dependencies
+* Replace UglifyJS with Terser. Depending on the options passed to minify, this might be a breaking change. 
+
 ## [0.6.1] - 2017-20-11
 
 ### Fix
