@@ -1,0 +1,12 @@
+.idea
+.codeclimate.yml
+.editorconfig
+.eslintrc
+.gitignore
+.publishrc
+.travis.yml
+coverage.js
+coverage/
+public
+spec/
+e2e_test/
